@@ -249,11 +249,26 @@
         document.getElementById('result-screen').style.display = 'block';
 
         // Redirecionamento automático após 3 segundos
-        setTimeout(() => {
-            const encodedValue = encodeURIComponent(classification);
-            const redirectUrl = `${FORM_BASE_URL}?${FIELD_NAME}=${encodedValue}`;
-            window.location.href = redirectUrl;
-        }, 3000);
+       // Redirecionamento automático marcando a opção no Forms
+setTimeout(() => {
+
+    let redirectUrl = "";
+
+    if (classification === "Pegada Ecológica Baixa") {
+        redirectUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u&rf7af72ca9ed74064b91440d62f996151=%22Pegada%20Ecol%C3%B3gica%20Baixa%22";
+    }
+
+    else if (classification === "Pegada Ecológica Moderada") {
+        redirectUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u&rf7af72ca9ed74064b91440d62f996151=%22Pegada%20Ecol%C3%B3gica%20Moderada%22";
+    }
+
+    else {
+        redirectUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u&rf7af72ca9ed74064b91440d62f996151=%22Pegada%20Ecol%C3%B3gica%20Alta%22";
+    }
+
+    window.location.href = redirectUrl;
+
+}, 3000);
     }
     function restartQuiz() {
         document.getElementById('result-screen').style.display = 'none';
