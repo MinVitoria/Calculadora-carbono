@@ -126,7 +126,6 @@
         .badge-mod { background-color: #ffe0b2; color: #c66900; }
         .badge-bad { background-color: #ffcdd2; color: #b71c1c; }
         
-        /* Estilo para o aviso de redirecionamento */
         .redirect-notice {
             margin-top: 20px;
             font-size: 14px;
@@ -203,7 +202,6 @@
     </div>
 </div>
 <script>
-
     function nextStep(currentStep) {
         document.getElementById(`step-${currentStep}`).classList.remove('active');
         document.getElementById(`step-${currentStep + 1}`).classList.add('active');
@@ -231,42 +229,37 @@
             classification = "Pegada Ecológica Baixa";
             badge.innerText = classification + " 🌱";
             badge.className = "badge badge-good";
-            feedback.innerText = "Parabéns! Seus hábitos diários ajudam a preservar o meio ambiente. Você consome recursos de forma consciente e gera pouco impacto no planeta.";
+            feedback.innerText = "Parabéns! Seus hábitos diários ajudam a preservar o meio ambiente.";
         } else if (total > 35 && total <= 85) {
             classification = "Pegada Ecológica Moderada";
             badge.innerText = classification + " ⚠️";
             badge.className = "badge badge-mod";
-            feedback.innerText = "Você está no caminho certo, mas ainda pode melhorar! Tente reduzir um pouco o tempo no banho ou priorizar transportes coletivos/ativos quando possível.";
+            feedback.innerText = "Você está no caminho certo, mas ainda pode melhorar!";
         } else {
             classification = "Pegada Ecológica Alta";
             badge.innerText = classification + " 🚨";
             badge.className = "badge badge-bad";
-            feedback.innerText = "Atenção! Seus hábitos atuais geram uma quantidade alta de emissões de carbono. Pequenas mudanças, como comer menos carne na semana ou evitar carros em trajetos curtos, fariam uma grande diferença.";
+            feedback.innerText = "Atenção! Seus hábitos atuais geram uma quantidade alta de emissões.";
         }
         
         document.getElementById('result-screen').style.display = 'block';
 
-        // Redirecionamento automático após 3 segundos
-       // Redirecionamento automático marcando a opção no Forms
-setTimeout(() => {
+        // Redirecionamento automático corrigido
+        setTimeout(() => {
+            let redirectUrl = "";
+            const baseUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u";
+            const fieldId = "rf7af72ca9ed74064b91440d62f996151";
 
-    const redirectUrl = "";
+            if (classification === "Pegada Ecológica Baixa") {
+                redirectUrl = `${baseUrl}&${fieldId}=Pegada%20Ecol%C3%B3gica%20Baixa`;
+            } else if (classification === "Pegada Ecológica Moderada") {
+                redirectUrl = `${baseUrl}&${fieldId}=Pegada%20Ecol%C3%B3gica%20Moderada`;
+            } else {
+                redirectUrl = `${baseUrl}&${fieldId}=Pegada%20Ecol%C3%B3gica%20Alta`;
+            }
 
-    if (classification === "Pegada Ecológica Baixa") {
-        redirectUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u&rf7af72ca9ed74064b91440d62f996151=%22Pegada%20Ecol%C3%B3gica%20Baixa%22";
-    }
-
-    else if (classification === "Pegada Ecológica Moderada") {
-        redirectUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u&rf7af72ca9ed74064b91440d62f996151=%22Pegada%20Ecol%C3%B3gica%20Moderada%22";
-    }
-
-    else {
-        redirectUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u&rf7af72ca9ed74064b91440d62f996151=%22Pegada%20Ecol%C3%B3gica%20Alta%22";
-    }
-
-    window.location.href = redirectUrl;
-
-}, 3000);
+            window.location.href = redirectUrl;
+        }, 3000);
     }
     function restartQuiz() {
         document.getElementById('result-screen').style.display = 'none';
