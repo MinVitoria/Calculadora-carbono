@@ -244,20 +244,14 @@
         
         document.getElementById('result-screen').style.display = 'block';
 
-        // Redirecionamento automático corrigido
         setTimeout(() => {
-            let redirectUrl = "";
+            // URL completa do formulário (ResponsePage.aspx) para garantir que os parâmetros funcionem
             const baseUrl = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vIeH_hTJZUaFRyaOFcsNmuKhHf17A51Al4bWO6aMohVUN1pQMEg5MFhSUjZIS0tZRE1IWVpCOVpVTy4u";
             const fieldId = "rf7af72ca9ed74064b91440d62f996151";
-
-            if (classification === "Pegada Ecológica Baixa") {
-                redirectUrl = `${baseUrl}&${fieldId}=Pegada%20Ecol%C3%B3gica%20Baixa`;
-            } else if (classification === "Pegada Ecológica Moderada") {
-                redirectUrl = `${baseUrl}&${fieldId}=Pegada%20Ecol%C3%B3gica%20Moderada`;
-            } else {
-                redirectUrl = `${baseUrl}&${fieldId}=Pegada%20Ecol%C3%B3gica%20Alta`;
-            }
-
+            
+            // Monta a URL com a classificação codificada
+            const redirectUrl = `${baseUrl}&${fieldId}=${encodeURIComponent(classification)}`;
+            
             window.location.href = redirectUrl;
         }, 3000);
     }
